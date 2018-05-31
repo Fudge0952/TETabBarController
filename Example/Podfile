@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'TETabBarController_Example' do
+  pod 'TETabBarController', :path => '../'
+
+  target 'TETabBarController_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
