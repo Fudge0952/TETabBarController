@@ -13,6 +13,10 @@
 
 static const void *TETabBarItemAssocKey = &TETabBarItemAssocKey;
 
+@interface TETabBarItem (MakeReadWrite)
+@property (nonatomic, nullable, readwrite) NSString *title;
+@end
+
 @implementation UIViewController (TETabBarControllerItem)
 
 - (TETabBarItem *)teTabBarItem {

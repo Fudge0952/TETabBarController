@@ -16,11 +16,14 @@
 
 @interface TETabBarController ()
 
+@property (nonatomic, nonnull, readwrite) TETabBar *tabBar;
 @property (nonatomic, nonnull) NSLayoutConstraint *tabBarHeightConstraint;
 
 @end
 
 @implementation TETabBarController
+
+@synthesize tabBar = _tabBar;
 
 #pragma mark - Getters/Setters
 
@@ -86,9 +89,15 @@
 
 #pragma mark - Custom Loading
 
-- (void)initObjects {
-	if (!self.tabBar) {
+- (TETabBar *)tabBar {
+	if (!_tabBar) {
 		_tabBar = [self generateTabBar];
+	}
+	return _tabBar;
+}
+
+- (void)initObjects {
+	if (![self.view.subviews containsObject:self.tabBar]) {
 		[self.view addSubview:self.tabBar];
 	}
 }
