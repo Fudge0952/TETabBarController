@@ -6,8 +6,8 @@
 //  Copyright (c) 2018 Timothy Ellis. All rights reserved.
 //
 
-@import UIKit;
+@import TETabBarController;
 
-@interface TEViewController : UIViewController
+@interface TEViewController : TETabBarController
 
 @end

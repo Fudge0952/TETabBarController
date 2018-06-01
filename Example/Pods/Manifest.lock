@@ -1,0 +1,16 @@
+PODS:
+  - TETabBarController (0.1.0)
+
+DEPENDENCIES:
+  - TETabBarController (from `../`)
+
+EXTERNAL SOURCES:
+  TETabBarController:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  TETabBarController: 2b99d9d3d54d6a6f1ce9379246e7426d42a77028
+
+PODFILE CHECKSUM: d509a027c937d0df12ce7319ad722a8685bc5d6a
+
+COCOAPODS: 1.5.3

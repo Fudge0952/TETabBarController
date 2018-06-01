@@ -22,7 +22,7 @@ pod 'TETabBarController'
 
 ## Author
 
-Timothy Ellis, tim.ellis@accelo.com
+Timothy Ellis, crazyivan444@gmail.com
 
 ## License
 

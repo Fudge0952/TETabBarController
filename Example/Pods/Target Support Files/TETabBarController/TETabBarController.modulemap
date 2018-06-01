@@ -1,0 +1,6 @@
+framework module TETabBarController {
+  umbrella header "TETabBarController-umbrella.h"
+
+  export *
+  module * { export * }
+}
