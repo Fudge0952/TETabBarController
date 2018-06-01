@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   the tab bar items
                        DESC
 
-  s.homepage         = 'https://bitbucket.org/al_timellis/TETabBarController'
+  s.homepage         = 'https://github.com/Fudge0952/TETabBarController'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = {
   	:type => 'MIT',
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
   	'Timothy Ellis' => 'crazyivan444@gmail.com'
   }
   s.source           = { 
-  	:git => 'https://bitbucket.org/al_timellis/TETabBarController.git', :tag => s.version.to_s 
+  	:git => 'https://github.com/Fudge0952/TETabBarController.git', :tag => s.version.to_s 
   }
 
   s.ios.deployment_target = '9.0'
