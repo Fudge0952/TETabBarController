@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   or make a tab tappable but not selectable.
 
   This project was created as a proof of concept since there is no native (or easy) way to customise
-  the tab bar items
+  the tab bar items.
                        DESC
 
   s.homepage         = 'https://github.com/Fudge0952/TETabBarController'

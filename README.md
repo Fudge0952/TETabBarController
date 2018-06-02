@@ -5,6 +5,11 @@
 [![License](https://img.shields.io/cocoapods/l/TETabBarController.svg?style=flat)](https://cocoapods.org/pods/TETabBarController)
 [![Platform](https://img.shields.io/cocoapods/p/TETabBarController.svg?style=flat)](https://cocoapods.org/pods/TETabBarController)
 
+This is a custom implementation of the tab bar which allows for more flexibility of the tabs shown. For example, you are able to add long press actions to the tab bar items, or make a tab tappable but not selectable.
+
+This project was created as a proof of concept since there is no native (or easy) way to customise the tab bar items.
+
+
 ## Screenshots
 
 ![Screenshot 1](https://raw.githubusercontent.com/Fudge0952/TETabBarController/master/Screenshots/ss1.jpg)
