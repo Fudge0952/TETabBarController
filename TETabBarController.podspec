@@ -11,12 +11,6 @@ Pod::Spec.new do |s|
   s.version          = '0.1.0'
   s.summary          = 'Custom implementation of the tab bar.'
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
   s.description      = <<-DESC
   This is a custom implementation of the tab bar which allows for more flexibility of the tabs shown.
   For example, you are able to add long press actions to the tab bar items, 
@@ -27,7 +21,12 @@ Pod::Spec.new do |s|
                        DESC
 
   s.homepage         = 'https://github.com/Fudge0952/TETabBarController'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.screenshots      = [
+    'https://raw.githubusercontent.com/Fudge0952/TETabBarController/master/Screenshots/ss1.jpg',
+    'https://raw.githubusercontent.com/Fudge0952/TETabBarController/master/Screenshots/ss2.jpg',
+    'https://raw.githubusercontent.com/Fudge0952/TETabBarController/master/Screenshots/ss3.jpg',
+    'https://raw.githubusercontent.com/Fudge0952/TETabBarController/master/Screenshots/ss4.jpg'
+  ]
   s.license          = {
   	:type => 'MIT',
   	:file => 'LICENSE'
@@ -43,11 +42,7 @@ Pod::Spec.new do |s|
 
   s.source_files = 'TETabBarController/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'TETabBarController' => ['TETabBarController/Assets/*.png']
-  # }
-
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  s.frameworks = 'UIKit'#, 'MapKit'
+  s.frameworks = 'UIKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
