@@ -203,6 +203,9 @@ static CGFloat const TETabBarTopLineWhiteAmount = 217.0f/255.0f;
 	}
 	
 	[self updateButtonConstraints];
+	if (self.selectedItem) {
+		[self selectButtonAtIndex:self.selectedItem.index];
+	}
 }
 
 - (void)updateButtonConstraints {
