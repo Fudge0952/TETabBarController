@@ -521,7 +521,7 @@
 				GCC_PREFIX_HEADER = "TETabBarController/TETabBarController-Prefix.pch";
 				INFOPLIST_FILE = "TETabBarController/TETabBarController-Info.plist";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.timellis.demo.TETabBarController-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -536,7 +536,7 @@
 				GCC_PREFIX_HEADER = "TETabBarController/TETabBarController-Prefix.pch";
 				INFOPLIST_FILE = "TETabBarController/TETabBarController-Info.plist";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.timellis.demo.TETabBarController-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
