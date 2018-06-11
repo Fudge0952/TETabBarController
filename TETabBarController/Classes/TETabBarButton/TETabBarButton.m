@@ -9,6 +9,9 @@
 #import "TETabBarButton.h"
 #import "TETabBarItem.h"
 
+static CGFloat const TETabBarButtonUnselectedWhiteAmount = 0.57f;
+static CGFloat const TETabBarButtonIsPressedWhiteAmount = 0.37f;
+
 static CGFloat const TETabBarButtonRegularImageSize = 24.0f;
 static CGFloat const TETabBarButtonRegularEdgePadding = 4.0f;
 static CGFloat const TETabBarButtonCompactImageSize = 20.0f;
@@ -72,19 +75,9 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 }
 
 - (void)commonInit {
-	[self setupObjects];
-	[self setupConstraints];
-}
-
-- (void)setupObjects {
-	self.longPressTargets = [NSMutableArray new];
-	
-	self.imageView = [self generateImageView];
-	[self addSubview:self.imageView];
-	
-	self.titleLabel = [self generateLabel];
-	[self addSubview:self.titleLabel];
-	
+	if ([self setupObjects]) {
+		[self setupConstraints];
+	}
 	if (self.item) {
 		if (self.item.image) {
 			self.imageView.image = [self.item.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -96,6 +89,22 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 			self.imageView.tintColor = [self selectedTintColor];
 		}
 	}
+}
+
+- (BOOL)setupObjects {
+	self.longPressTargets = [NSMutableArray new];
+	
+	if (self.imageView && self.titleLabel) {
+		return NO;
+	}
+	
+	self.imageView = [self generateImageView];
+	[self addSubview:self.imageView];
+	
+	self.titleLabel = [self generateLabel];
+	[self addSubview:self.titleLabel];
+	
+	return YES;
 }
 
 - (void)setupConstraints {
@@ -325,14 +334,14 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 	if (!self.item.isSelectable) {
 		return [self changeBrightness:self.tintColor amount:0.7f];
 	}
-	return [UIColor colorWithWhite:0.57f alpha:1.0f];
+	return [UIColor colorWithWhite:TETabBarButtonUnselectedWhiteAmount alpha:1.0f];
 }
 
 - (UIColor *)isPressedColor {
 	if (!self.item.isSelectable) {
 		return [self changeBrightness:[self unselectedColor] amount:0.8f];
 	}
-	return [UIColor colorWithWhite:0.37f alpha:1.0f];
+	return [UIColor colorWithWhite:TETabBarButtonIsPressedWhiteAmount alpha:1.0f];
 }
 
 - (UIColor *)changeBrightness:(UIColor *)color amount:(CGFloat)amount {
@@ -391,10 +400,11 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 	UILabel *label = [UILabel new];
 	label.translatesAutoresizingMaskIntoConstraints = NO;
 	label.numberOfLines = 1;
-	label.textColor = [self unselectedColor];
+	label.textColor = [UIColor colorWithWhite:TETabBarButtonUnselectedWhiteAmount alpha:1.0f];
 	label.textAlignment = NSTextAlignmentCenter;
 	label.font = [self getLabelFontForCurrentStyle];
 	label.lineBreakMode = NSLineBreakByTruncatingTail;
+	label.highlighted = NO;
 	return label;
 }
 
