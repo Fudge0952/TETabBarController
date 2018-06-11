@@ -92,6 +92,9 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 		if (self.item.title) {
 			self.titleLabel.text = self.item.title;
 		}
+		if (!self.item.isSelectable) {
+			self.imageView.tintColor = [self selectedTintColor];
+		}
 	}
 }
 
@@ -100,7 +103,6 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 	self.constrainedStyle = [self getItemStyle];
 	[NSLayoutConstraint activateConstraints:self.currentConstraints];
 }
-
 
 - (void)addLongPressTarget:(id)target action:(SEL)action {
 	NSValue *targetValue = [NSValue valueWithNonretainedObject:target];
@@ -320,10 +322,16 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 }
 
 - (UIColor *)unselectedColor {
+	if (!self.item.isSelectable) {
+		return [self changeBrightness:self.tintColor amount:0.7f];
+	}
 	return [UIColor colorWithWhite:0.57f alpha:1.0f];
 }
 
 - (UIColor *)isPressedColor {
+	if (!self.item.isSelectable) {
+		return [self changeBrightness:[self unselectedColor] amount:0.8f];
+	}
 	return [UIColor colorWithWhite:0.37f alpha:1.0f];
 }
 
@@ -358,6 +366,15 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 - (void)tintColorDidChange {
 	[super tintColorDidChange];
 	self.selectedTintColor = [self changeBrightness:self.tintColor amount:0.8f];
+	if (self.selected) {
+		self.imageView.tintColor = self.selectedTintColor;
+		self.titleLabel.highlightedTextColor = self.selectedTintColor;
+	}
+	else if (!self.item.isSelectable) {
+		UIColor *unselectedColor = [self unselectedColor];
+		self.imageView.tintColor = unselectedColor;
+		self.titleLabel.highlightedTextColor = unselectedColor;
+	}
 }
 
 - (void)setIsPressed:(BOOL)isPressed {
@@ -375,7 +392,6 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 	label.translatesAutoresizingMaskIntoConstraints = NO;
 	label.numberOfLines = 1;
 	label.textColor = [self unselectedColor];
-	label.highlightedTextColor = self.tintColor;
 	label.textAlignment = NSTextAlignmentCenter;
 	label.font = [self getLabelFontForCurrentStyle];
 	label.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -393,6 +409,7 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 - (void)setSelected:(BOOL)selected {
 	[super setSelected:selected];
 	self.imageView.tintColor = selected ? self.tintColor : [self unselectedColor];
+	self.titleLabel.highlightedTextColor = selected ? self.tintColor : [self unselectedColor];
 	self.titleLabel.highlighted = selected;
 }
 
