@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'TETabBarController'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.summary          = 'Custom implementation of the tab bar.'
 
   s.description      = <<-DESC
@@ -44,5 +44,4 @@ Pod::Spec.new do |s|
   
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end
