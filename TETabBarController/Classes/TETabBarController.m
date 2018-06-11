@@ -186,7 +186,7 @@
 #pragma mark - Public Methods
 
 - (void)addLongPressTarget:(id)target action:(SEL)action toViewControllerTab:(UIViewController *)viewController {
-	if (!self.viewControllers && self.viewControllers.count == 0) {
+	if (!self.viewControllers || self.viewControllers.count == 0) {
 		return;
 	}
 	NSUInteger idx = [self.viewControllers indexOfObject:viewController];
