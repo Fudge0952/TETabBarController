@@ -17,7 +17,6 @@
 @interface TETabBarController ()
 
 @property (nonatomic, nonnull, readwrite) TETabBar *tabBar;
-@property (nonatomic, nonnull) NSLayoutConstraint *tabBarHeightConstraint;
 
 @end
 
