@@ -9,7 +9,7 @@
 #import "TETabBarButton.h"
 #import "TETabBarItem.h"
 
-static CGFloat const TETabBarButtonRegularImageSize = 30.0f;
+static CGFloat const TETabBarButtonRegularImageSize = 24.0f;
 static CGFloat const TETabBarButtonRegularEdgePadding = 4.0f;
 static CGFloat const TETabBarButtonCompactImageSize = 20.0f;
 static CGFloat const TETabBarButtonCompactObjectPadding = 4.0f;
