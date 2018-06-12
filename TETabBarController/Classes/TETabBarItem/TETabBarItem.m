@@ -30,8 +30,15 @@
 
 - (id)copyWithZone:(NSZone *)zone {
 	typeof(self) copy = [[self class] allocWithZone:zone];
-	copy.title = [self.title copyWithZone:zone];
-	copy.image = [[UIImage allocWithZone: zone] initWithCGImage: self.image.CGImage];
+	if (self.title) {
+		copy.title = [self.title copyWithZone:zone];
+	}
+	if (self.image) {
+		copy.image = [[UIImage allocWithZone: zone] initWithCGImage: self.image.CGImage];
+	}
+	if (self.selectedImage) {
+		copy.selectedImage = [[UIImage allocWithZone: zone] initWithCGImage: self.selectedImage.CGImage];
+	}
 	return copy;
 }
 

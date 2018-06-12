@@ -22,6 +22,15 @@ typedef NS_ENUM(NSInteger, TETabBarItemStyle) {
 
 @property (nonatomic, nullable) UIImage *image;
 
+/// Optional image to be shown when selected. Will use image if nil
+@property (nonatomic, nullable) UIImage *selectedImage;
+
+/**
+ Whether or not the option can be selected (this is different from highlighted).
+ If this is set to YES then the option can be selected like a radio option.
+ If this is set to NO then the option can still be tapped however the selection won't persist.
+ Defaults to YES.
+ */
 @property (nonatomic) BOOL isSelectable;
 
 @property (nonatomic, readonly) NSUInteger index;

@@ -416,11 +416,22 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 	return imageView;
 }
 
+- (UIImage *)imageForCurrentState {
+	if (!self.item) {
+		return nil;
+	}
+	if ((!self.item.image || self.selected) && self.item.selectedImage) {
+		return self.item.selectedImage;
+	}
+	return self.item.image;
+}
+
 - (void)setSelected:(BOOL)selected {
 	[super setSelected:selected];
 	self.imageView.tintColor = selected ? self.tintColor : [self unselectedColor];
 	self.titleLabel.highlightedTextColor = selected ? self.tintColor : [self unselectedColor];
 	self.titleLabel.highlighted = selected;
+	self.imageView.image = [[self imageForCurrentState] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 }
 
 #pragma mark - UIControl overrides
