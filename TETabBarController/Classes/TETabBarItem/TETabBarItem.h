@@ -17,8 +17,8 @@ typedef NS_ENUM(NSInteger, TETabBarItemStyle) {
 
 @interface TETabBarItem : NSObject <NSCopying>
 
-/// The title of the view controller. This values will match the value of the view controller's title.
-@property (nonatomic, nullable, readonly) NSString *title;
+/// The title of the view controller. This value will match the value of the view controller's title.
+@property (nonatomic, nullable) NSString *title;
 
 @property (nonatomic, nullable) UIImage *image;
 

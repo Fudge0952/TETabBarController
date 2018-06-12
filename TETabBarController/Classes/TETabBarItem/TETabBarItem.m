@@ -12,7 +12,6 @@
 //static CGFloat const TETabBarItemTextImagePadding = 8.0f;
 
 @interface TETabBarItem ()
-@property (nonatomic, nullable, readwrite) NSString *title;
 @property (nonatomic, readwrite) TETabBarItemStyle style;
 @property (nonatomic, readwrite) NSUInteger index;
 @end
