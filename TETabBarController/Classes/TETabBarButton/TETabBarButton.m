@@ -23,7 +23,7 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 
 @interface TETabBarButton ()
 
-@property (nonatomic, nonnull) UIColor *selectedTintColor;
+@property (nonatomic, nonnull) UIColor *highlightedTintColor;
 @property (nonatomic, nullable, weak) TETabBarItem *item;
 
 @property (nonatomic, nonnull) UIImageView *imageView;
@@ -86,7 +86,7 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 			self.titleLabel.text = self.item.title;
 		}
 		if (!self.item.isSelectable) {
-			self.imageView.tintColor = [self selectedTintColor];
+			self.imageView.tintColor = [self highlightedTintColor];
 		}
 	}
 }
@@ -117,9 +117,9 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 	NSValue *targetValue = [NSValue valueWithNonretainedObject:target];
 	NSValue *actionValue = [NSValue valueWithPointer:action];
 	[self.longPressTargets addObject:@[
-		targetValue,
-		actionValue,
-	]];
+									   targetValue,
+									   actionValue,
+									   ]];
 	if (!self.longPressGestureRecognizer) {
 		self.longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(didLongPressWithGestureRecognizer:)];
 		[self addGestureRecognizer:self.longPressGestureRecognizer];
@@ -242,7 +242,7 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 																			   views:NSDictionaryOfVariableBindings(_imageView, _titleLabel)
 									  ]
 	 ];
-
+	
 	return constraints;
 }
 
@@ -365,19 +365,19 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 	return nil;
 }
 
-- (UIColor *)selectedTintColor {
-	if (!_selectedTintColor) {
-		_selectedTintColor = [self changeBrightness:self.tintColor amount:0.8f];
+- (UIColor *)highlightedTintColor {
+	if (!_highlightedTintColor) {
+		_highlightedTintColor = [self changeBrightness:self.tintColor amount:0.8f];
 	}
-	return _selectedTintColor;
+	return _highlightedTintColor;
 }
 
 - (void)tintColorDidChange {
 	[super tintColorDidChange];
-	self.selectedTintColor = [self changeBrightness:self.tintColor amount:0.8f];
+	self.highlightedTintColor = [self changeBrightness:self.tintColor amount:0.8f];
 	if (self.selected) {
-		self.imageView.tintColor = self.selectedTintColor;
-		self.titleLabel.highlightedTextColor = self.selectedTintColor;
+		self.imageView.tintColor = self.tintColor;
+		self.titleLabel.highlightedTextColor = self.tintColor;
 	}
 	else if (!self.item.isSelectable) {
 		UIColor *unselectedColor = [self unselectedColor];
@@ -388,7 +388,7 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 
 - (void)setIsPressed:(BOOL)isPressed {
 	UIColor *notPressedColor = self.selected ? self.tintColor : [self unselectedColor];
-	UIColor *isPressedColor = self.selected ? self.selectedTintColor : [self isPressedColor];
+	UIColor *isPressedColor = self.selected ? self.highlightedTintColor : [self isPressedColor];
 	self.imageView.tintColor = isPressed ? isPressedColor : notPressedColor;
 	self.titleLabel.highlightedTextColor = isPressed ? isPressedColor : self.tintColor;
 	self.titleLabel.highlighted = isPressed || self.selected;
