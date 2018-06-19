@@ -20,6 +20,7 @@ static CGFloat const TETabBarButtonCompactObjectPadding = 4.0f;
 static CGFloat const TETabBarButtonRegulatFontSize = 10.0f;
 static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 
+static void * TETabBarButtonContext = &TETabBarButtonContext;
 
 @interface TETabBarButton ()
 
@@ -74,6 +75,23 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 	return self;
 }
 
+- (void)dealloc {
+	@try {
+		NSArray <NSString *> *keyPathsToObserve = @[
+			NSStringFromSelector(@selector(title)),
+			NSStringFromSelector(@selector(image)),
+			NSStringFromSelector(@selector(selectedImage)),
+		];
+		for (NSString *keyPath in keyPathsToObserve) {
+			[self.item removeObserver:self
+						   forKeyPath:keyPath
+							  context:TETabBarButtonContext
+			 ];
+		}
+	}
+	@catch (NSException *exception) {}
+}
+
 - (void)commonInit {
 	if ([self setupObjects]) {
 		[self setupConstraints];
@@ -87,6 +105,18 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 		}
 		if (!self.item.isSelectable) {
 			self.imageView.tintColor = [self highlightedTintColor];
+		}
+		NSArray <NSString *> *keyPathsToObserve = @[
+			NSStringFromSelector(@selector(title)),
+			NSStringFromSelector(@selector(image)),
+			NSStringFromSelector(@selector(selectedImage)),
+		];
+		for (NSString *keyPath in keyPathsToObserve) {
+			[self.item addObserver:self
+						forKeyPath:keyPath
+						   options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+						   context:TETabBarButtonContext
+			 ];
 		}
 	}
 }
@@ -460,6 +490,28 @@ static CGFloat const TETabBarButtonCompactFontSize = 12.0f;
 - (void)cancelTrackingWithEvent:(UIEvent *)event {
 	[self setIsPressed:NO];
 	return [super cancelTrackingWithEvent:event];
+}
+
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+	if (context != TETabBarButtonContext) {
+		return;
+	}
+	if ([keyPath isEqualToString:NSStringFromSelector(@selector(title))]) {
+		NSString *newTitle = change[NSKeyValueChangeNewKey];
+		self.titleLabel.text = newTitle;
+	}
+	else if ([keyPath isEqualToString:NSStringFromSelector(@selector(image))]) {
+		self.imageView.image = [[self imageForCurrentState] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+	}
+	else if ([keyPath isEqualToString:NSStringFromSelector(@selector(selectedImage))]) {
+		UIImage *selectedImage = change[NSKeyValueChangeNewKey];
+		if (selectedImage && self.selected) {
+			self.imageView.image = [[self imageForCurrentState] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+		}
+	}
+
 }
 
 @end
