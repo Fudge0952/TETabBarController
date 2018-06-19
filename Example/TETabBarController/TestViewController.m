@@ -7,6 +7,8 @@
 //
 
 #import "TestViewController.h"
+#import <TETabBarController/TETabBarItem.h>
+#import <TETabBarController/UIViewController+TETabBarControllerItem.h>
 
 @interface TestViewController ()
 
@@ -39,6 +41,14 @@
 	[button setFrame:CGRectMake(0, labelFrame.origin.y + labelFrame.size.height + 16, self.view.bounds.size.width, 50)];
 	[button addTarget:self action:@selector(buttonTapped) forControlEvents:UIControlEventTouchUpInside];
 	[self.view addSubview:button];
+	
+	UIButton *button2 = [UIButton buttonWithType:UIButtonTypeSystem];
+	button2.translatesAutoresizingMaskIntoConstraints = YES;
+	button2.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	[button2 setTitle:@"Test Rename" forState:UIControlStateNormal];
+	[button2 setFrame:CGRectMake(0, button.frame.origin.y + button.frame.size.height + 16, self.view.bounds.size.width, 50)];
+	[button2 addTarget:self action:@selector(button2Tapped) forControlEvents:UIControlEventTouchUpInside];
+	[self.view addSubview:button2];
 }
 
 - (void)buttonTapped {
@@ -48,6 +58,10 @@
 		vc.title = @"Pushed view";
 		[self.navigationController pushViewController:vc animated:YES];
 	}
+}
+
+- (void)button2Tapped {
+	self.teTabBarItem.title = [self.teTabBarItem.title stringByAppendingString:@"1"];
 }
 
 - (void)didReceiveMemoryWarning {
